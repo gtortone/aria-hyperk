@@ -1,0 +1,39 @@
+diff --git arch/arm/dts/at91sam9x5ek.dtsi arch/arm/dts/at91sam9x5ek.dtsi
+index f2a532d605..2737fb948a 100644
+--- arch/arm/dts/at91sam9x5ek.dtsi
++++ arch/arm/dts/at91sam9x5ek.dtsi
+@@ -118,14 +118,14 @@
+ 			};
+ 
+ 			spi0: spi@f0000000 {
+-				status = "okay";
++            status = "okay";
+ 				cs-gpios = <&pioA 14 0>, <0>, <0>, <0>;
+-				spi_flash@0 {
+-					compatible = "spi-flash";
+-					spi-max-frequency = <50000000>;
+-					reg = <0>;
+-				};
+-			};
++            spi_flash@0 {
++               compatible = "atmel,at45", "atmel,dataflash";
++               spi-max-frequency = <50000000>;
++               reg = <0>;
++            };
++         };
+ 
+ 			watchdog@fffffe40 {
+ 				status = "okay";
+diff --git include/configs/at91sam9x5ek.h include/configs/at91sam9x5ek.h
+index 63305a7cdd..55281c9172 100644
+--- include/configs/at91sam9x5ek.h
++++ include/configs/at91sam9x5ek.h
+@@ -100,7 +100,7 @@
+ #elif defined(CONFIG_SYS_USE_DATAFLASH)
+ /* bootstrap + u-boot + env + linux in data flash */
+ #define CONFIG_ENV_OFFSET	0x4200
+-#define CONFIG_ENV_SIZE		0x4200
++#define CONFIG_ENV_SIZE		0x3C00
+ #define CONFIG_ENV_SECT_SIZE	0x210
+ #define CONFIG_ENV_SPI_MAX_HZ	30000000
+ #define CONFIG_BOOTCOMMAND	"sf probe 0; " \
